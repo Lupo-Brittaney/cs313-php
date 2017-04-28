@@ -8,23 +8,41 @@
 	</head>
 	<body>
         <header>
+            
             <h1>Hiking Colorado</h1>
+            <nav>
+                <ul>
+                    <li><a href="assignments.html">Assignemnts</a></li>
+                </ul>
+            </nav>
 
         </header>
         <main>
-            <div class="large"><img src="img/img1.JPG" alt="hiking picture 1"></div>
-            <div class="small"><img src="img/img3.JPG" alt="hiking picture 3"></div>
-            <div class="small"><img src="img/img4.JPG" alt="hiking picture 4"></div>
-            <div class="small"><img src="img/img5.JPG" alt="hiking picture 5"></div>
-
+            <div id="container">
+                 <p class="info">I love Colorado and summer is my favorite. I love to hike thoughout this beautiful state to see all it has to offer. These are all imags that my daughter took while on some of our hikes last summer. I am excited to have summer weather again and start hiking once more. This year we aim to identify the beautiful wild flowers we find.</p>
+                <div id="empty"><img id="rotate"src="img/img11.JPG" alt="rotating images of wildflowers"></div>
+            
+                <div onmouseover="mouseover('img/img1.jpg')" class="img"><img src="img/img1.JPG" alt="hiking picture 1"></div>
+                <div onmouseover="mouseover('img/img3.jpg')" class="img"><img src="img/img3.JPG" alt="hiking picture 3"></div>
+                <div onmouseover="mouseover('img/img4.jpg')" class="img"><img src="img/img4.JPG" alt="hiking picture 4"></div>
+                <div onmouseover="mouseover('img/img5.jpg')" class="img"><img src="img/img5.JPG" alt="hiking picture 5"></div>
+                <div onmouseover="mouseover('img/img6.jpg')" class="img"><img src="img/img6.JPG" alt="hiking picture 6"></div>
+                <div onmouseover="mouseover('img/img7.jpg')" class="img"><img src="img/img7.JPG" alt="hiking picture 7"></div>
+                <div onmouseover="mouseover('img/img8.jpg')" class="img"><img src="img/img8.JPG" alt="hiking picture 8"></div>
+                <div onmouseover="mouseover('img/img9.jpg')" class="img"><img src="img/img9.JPG" alt="hiking picture 9"></div>
+                <div onmouseover="mouseover('img/img10.jpg')" class="img"><img src="img/img10.JPG" alt="hiking picture 10"></div>
+                <div onmouseover="mouseover('img/img2.jpg')" class="img"><img src="img/img2.JPG" alt="hiking picture 2"></div>
+            </div>
+                
         </main> 
         <footer>
-            <nav>
-                <ul>
-                    <li>Assignments</li>
-                </ul>
-            </nav>
-        <p>&copy; Brittaney Lupo 2017</p>
+                 
         </footer>
-	</body>
+	   <script>
+            function mouseover(obj){
+                document.getElementById("rotate").src = obj;
+            }
+        </script>
+    </body>
+    
 </html>
