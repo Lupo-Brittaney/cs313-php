@@ -11,7 +11,7 @@ if (isset($_POST['email'])){
     $personReturn=get_person($email);
     if($personReturn==!NULL){
       $name=$personReturn['firstname'];
-     $person_id=$personReturn['id'];
+      $person_id=$personReturn['id'];
         $_SESSION['email']=$email;
         $_SESSION['name']=$name;
         $_SESSION['person_id']=$person_id;
@@ -19,7 +19,7 @@ if (isset($_POST['email'])){
         header('Location:loggedin.php');
         exit();
         //$message = 'It worked';
-        //var_dump($_SESSION);
+        var_dump($_SESSION);
     }else{
        $message= 'User email not found.';
     }      
@@ -27,14 +27,18 @@ if (isset($_POST['email'])){
 //    $message='Please submit a valid email address';
 //}
 
-
+var_dump($_SESSION);
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
 }
-
+if (isset($_POST['logout'])){
+    unset($_SESSION['email']);
+    unset($_SESSION['name']);
+    unset($_SESSION['person_id']);
+}
 
 
 ?>
@@ -50,6 +54,11 @@ function test_input($data) {
     <body>
         <header>
             <h1>LeaguePay</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <input type="hidden" name ="logout" >
+                <input type="submit" name='logout' value="Log Out">
+            </form>
+            
         </header>
         <div class="center">
             <?php if (!empty($message)){?><p><?php echo $message;?></p><?php }?>

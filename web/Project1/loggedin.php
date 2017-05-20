@@ -6,15 +6,23 @@ require_once('database.php');
 require_once('login.php');
 if (isset($_SESSION)){
     $person=$_SESSION['person_id'];
-    $organizations=get_orgs('2');
+    $organizations=get_orgs($person);
    // $message = 'It worked';
    // var_dump($_SESSION);
     
   //  var_dump($organizations);
-    
-
 }
 
+if (isset($_POST['logout'])){
+    unset($_SESSION['email']);
+    unset($_SESSION['name']);
+    unset($_SESSION['person_id']);
+    session_destroy() ;
+     header('Location:index.php');
+    exit();
+}
+
+var_dump($_SESSION);
 
 
 ?>
@@ -28,6 +36,10 @@ if (isset($_SESSION)){
     <body>
         <header>
             <h1>LeaguePay</h1>
+              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <input type="hidden" name ="logout" >
+                <input type="submit" name='logout' value="Log Out">
+            </form>
         </header>
         <div class="center">
             

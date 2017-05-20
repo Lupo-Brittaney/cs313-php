@@ -9,7 +9,7 @@ function get_person($email){
     $statement=$db->prepare($query);
     $statement->bindValue (':email', $email);
     $statement->execute();
-    $personReturn=$statement->fetchAll();
+    $personReturn=$statement->fetch();
     $statement->closeCursor();
     return $personReturn;
 }
