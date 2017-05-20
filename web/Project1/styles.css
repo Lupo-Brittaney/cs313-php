@@ -1,0 +1,34 @@
+header{ 
+
+background-color: darkblue;
+}
+h1{
+    color:whitesmoke;
+    padding:1em;
+}
+.center{
+    display:flex;
+    margin:2.5% 20%;
+     
+    
+}
+.intro{
+    flex: 1 150px;
+    justify-content: space-around;
+}
+h2{
+    color:darkblue;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+table {
+    border: 1px solid black;
+}
+th{
+    background-color: beige;
+}
+tr:nth-child(odd) {
+  background: #eee;
+}
