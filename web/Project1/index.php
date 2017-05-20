@@ -19,7 +19,7 @@ if (isset($_POST['email'])){
         header('Location:loggedin.php');
         exit();
         //$message = 'It worked';
-        var_dump($_SESSION);
+        //var_dump($_SESSION);
     }else{
        $message= 'User email not found.';
     }      
