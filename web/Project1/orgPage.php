@@ -24,7 +24,7 @@ $members = get_members($_SESSION['orgId']);
 if (isset($_POST['update'])){
     $memberId= filter_input(INPUT_POST, 'name', FILTER_SANITIZE_NUMBER_INT);
     $payAmount= filter_input(INPUT_POST, 'payAmount', FILTER_SANITIZE_NUMBER_INT);
-    $payType= filter_input(INPUT_POST, 'payType', FILTER_SANITIZE_STRING);
+    $payType= filter_input(INPUT_POST, 'payType');
     update_pay($memberId, $payAmount, $payType);
     header('Location:orgPage.php');
     exit();
