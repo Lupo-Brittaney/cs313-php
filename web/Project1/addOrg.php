@@ -4,14 +4,6 @@
 session_start();
 require_once('database.php');
 require_once('login.php');
-if (isset($_SESSION)){
-    $person=$_SESSION['person_id'];
-    $organizations=get_orgs($person);
-   // $message = 'It worked';
-   // var_dump($_SESSION);
-    
-  //  var_dump($organizations);
-}
 
 if (isset($_POST['logout'])){
     unset($_SESSION['email']);
@@ -21,7 +13,19 @@ if (isset($_POST['logout'])){
      header('Location:index.php');
     exit();
 }
-
+if (isset($_POST['add'])){
+    $name= filter_input(INPUT_POST, 'orgName', FILTER_SANITIZE_STRING);
+    $fee =filter_input(INPUT_POST, 'fee', FILTER_SANITIZE_NUMBER_INT);
+    $ownerId= $_SESSION['person_id'];
+    //var_dump($name);
+    //var_dump($fee);
+    //var_dump($ownerId);
+    add_org($name, $fee, $ownerId);
+    header('Location:dashboard.php');
+    exit();
+    
+    
+}
 //var_dump($_SESSION);
 
 
@@ -42,21 +46,19 @@ if (isset($_POST['logout'])){
             </form>
         </header>
         <div class="center">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                
+                <label for="orgName">Organization Name</label>
+                <input type="text" name="orgName">
+                <label for="fee">Fee</label>
+                <input type="number" name="fee">
+
+                <input type="submit" name ="add" value="Add">
+                
             
-            <?php if (!empty($message)){?><p><?php echo $message;?></p><?php }?>
-            <table>
-                <tr>
-                    <th>Organization</th>
-                    <th>Fee</th>
-                </tr>
-                <tr>
-                <?php foreach ($organizations as $org): ?> 
-                    <td><?php echo $org['name']; ?></td>
-                    <td>$<?php echo $org['fee']; ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+            </form>            
         </div>
+        
     </body>    
     <footer>
     </footer>

@@ -3,7 +3,8 @@
 session_start();
 require_once('database.php');
 require_once('login.php');
-
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 //check for session variable = person logged in
 if (isset($_POST['email'])){
@@ -16,7 +17,7 @@ if (isset($_POST['email'])){
         $_SESSION['name']=$name;
         $_SESSION['person_id']=$person_id;
         
-        header('Location:loggedin.php');
+        header('Location:dashboard.php');
         exit();
         //$message = 'It worked';
         //var_dump($_SESSION);
@@ -27,7 +28,7 @@ if (isset($_POST['email'])){
 //    $message='Please submit a valid email address';
 //}
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
