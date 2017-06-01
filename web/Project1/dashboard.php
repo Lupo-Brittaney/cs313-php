@@ -49,23 +49,26 @@ if (isset($_POST['logout'])){
             
             <?php if (!empty($message)){?><p><?php echo $message;?></p><?php }?>
             <table>
-                <caption>Member</caption>
+                
                 <tr>
                     <th>Organization</th>
                     <th>Fee</th>
+                    <th>Amount Paid</th>
                 </tr>
                 <tr>
                 <?php foreach ($organizations as $org): ?> 
                     <td><?php echo $org['name']; ?></td>
                     <td>$<?php echo $org['fee']; ?></td>
+                    <td>$<?php echo $org['payamount']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </table>
             <table>
-                <caption>Owner</caption>
+                
                 <tr>
                     <th>Organization</th>
                     <th>Fee</th>
+                    <th> </th>
                 </tr>
                 <tr>
                 <?php foreach ($owner as $own): ?> 
@@ -73,7 +76,8 @@ if (isset($_POST['logout'])){
                     <td>$<?php echo $own['fee']; ?></td>
                     <td><form action="orgPage.php" method="post">
                             <input hidden name="orgId" value="<?php echo $own['id'];?>">
-                            <input type="submit"  name="toUpdate" value="Update">
+                            <input hidden name="orgName" value="<?php echo $own['name'];?>">
+                            <input type="submit"  name="toUpdate" value="Details">
                         </form>
                     </td>
 

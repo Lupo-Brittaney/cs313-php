@@ -16,10 +16,10 @@ function get_person($email){
 
 function get_orgs($person){
     global $db;
-    $query='SELECT org.name, org.fee FROM org
-            INNER JOIN member
-            ON org.id = member.org_id
-            WHERE member.person_id = :person';
+    $query='SELECT o.name, o.fee, m.payAmount FROM org o
+            INNER JOIN member m
+            ON o.id = m.org_id
+            WHERE m.person_id = :person';
     $statement=$db->prepare($query);
     $statement->bindValue (':person', $person);
     $statement->execute();
@@ -64,7 +64,7 @@ function add_org($name, $fee, $ownerId){
 }
 function get_members($orgId){
     global $db;
-    $query = 'SELECT p.firstname, p.lastname, p.email, m.payAmount, m.person_id
+    $query = 'SELECT p.firstname, p.lastname, p.email, m.payAmount, m.person_id, m.id
              FROM person p
              INNER JOIN member m 
              ON p.id = m.person_id
@@ -83,6 +83,30 @@ function update_pay($memberId, $payAmount, $payType){
     $statement= $db->exec($query);
    
     
+}
+function add_member($personId, $payAmount, $payType, $orgId){
+    global $db;
+    $query ='INSERT INTO member (person_id, org_id, payAmount, payType)
+            VALUES (:personId, :orgId, :payAmount, :payType)';
+    $statement=$db->prepare($query);
+    $statement->bindValue(':orgId', $orgId);
+    $statement->bindValue(':personId', $personId);
+    $statement->bindValue(':payAmount', $payAmount);
+    $statement->bindValue(':payType', $payType);
+    $statement->execute();
+    $statement->closeCursor();
+    
+}
+function add_person($firstname, $lastname, $email){
+    global $db;
+    $query ='INSERT INTO person (firstname, lastname, email)
+            VALUES (:firstname, :lastname, :email)';
+    $statement=$db->prepare($query);
+    $statement->bindValue(':firstname', $firstname);
+    $statement->bindValue(':lastname', $lastname);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+    $statement->closeCursor();   
 }
 
 ?>
