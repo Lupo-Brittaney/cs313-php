@@ -39,6 +39,13 @@ if(isset($_POST['delete'])){
    exit();
     
 }
+if (isset($_POST['deletemember'])){
+    $memberId= filter_input(INPUT_POST, 'memberId', FILTER_SANITIZE_NUMBER_INT);
+    delete_member($memberId);
+    header('Location:orgPage.php');
+    exit();
+    
+}
 if (isset($_POST['addMember'])){
     $payAmount= filter_input(INPUT_POST, 'payAmount', FILTER_SANITIZE_NUMBER_INT);
     $payType= filter_input(INPUT_POST, 'payType', FILTER_SANITIZE_STRING);
@@ -103,8 +110,8 @@ if (isset($_POST['addMember'])){
                     <td><a href="mailto:<?php echo $member['email']; ?>"><?php echo $member['email']; ?></a></td>
                     <td>            
                         <form name="deleteMember" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                        <input type="hidden" value="<?php echo $member['id']; ?>">
-                        <input type="submit" name="deleteMember" value="Delete Member" onclick="return confirm('Are you sure you want to delete this member?');">
+                        <input type="hidden" name="memberId" value="<?php echo $member['id']; ?>">
+                        <input type="submit" name="deletemember" value="Delete Member" onclick="return confirm('Are you sure you want to delete this member?');">
             </form> </td>
                 </tr>
                 <?php endforeach; ?>

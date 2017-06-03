@@ -47,6 +47,11 @@ function delete_org($orgId){
 
     
 }
+function delete_member($memberId){
+    global $db;
+    $query= "DELETE FROM member WHERE id='$memberId'";
+    $statement= $db->exec($query);
+}
 function add_org($name, $fee, $ownerId){
     global $db;
     $query= 'INSERT INTO org 
