@@ -54,10 +54,9 @@ if (isset($_POST['addMember'])){
         exit();
     }else{
         $personId= add_person($firstname, $lastname, $email);
-        //var_dump($firstname);
-        //var_dump($lsstname);
-        //var_dump($email);
-        $insertMember=add_member($personId, $payAmount, $payType, $orgId);
+        $personReturn=get_person($email);
+        $person_id=$personReturn['id'];
+        $insertMember=add_member($person_id, $payAmount, $payType, $orgId);
         header('Location:orgPage.php');
         exit();
         
