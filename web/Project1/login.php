@@ -108,5 +108,15 @@ function add_person($firstname, $lastname, $email){
     $statement->execute();
     $statement->closeCursor();   
 }
-
+function get_fee($orgId){
+    global $db;
+    $query = 'SELECT fee FROM org WHERE id= :orgId';
+    $statement= $db-> prepare($query);
+    $statement->bindValue(':orgId', $orgId);
+    $statement->execute();
+    $fee=$statement->fetch();
+    $statement->closeCursor();
+    return $fee;
+    
+}
 ?>

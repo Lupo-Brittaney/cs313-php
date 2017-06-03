@@ -1,0 +1,64 @@
+            <script>
+                /*function validateMemberForm() {
+                    var num= document.addMember.payAmount.value;
+                    var email = document.addMember.email.value;
+                    var atposition=x.indexOf("@");
+                    var dotposition= x.lastindexOf(".");
+                    if(document.addMember.firstName.value == ""){
+                        alert("Name must be filled out");
+                        document.addMember.firstName.focus();
+                        return false;
+                    }
+                  
+                     if(document.addMember.lastName.value == ""){
+                        alert("Last name must be entered");
+                        document.addMemberr.lastName.focus();
+                        return false;
+                    }
+                     if(document.addMember.payAmount.value == ""){
+                        alert("Enter amount paid");
+                        document.addMember.payAmount.focus();
+                        return false;
+                    }
+                      if (isNaN(num)){
+                        alert("Pay amount must be a number");
+                        document.addMember.payAmount.focus();
+                        return false;
+                    }
+                      if(document.addMember.payType.value == ""){
+                        alert("Payment type must be selected");
+                        document.addMember.payType.focus();
+                        return false;
+                    }
+
+                      if(document.addMember.email.value == ""){
+                        alert("Enter valid email");
+                        document.addMember.email.focus();
+                        return false;
+                    }
+                    if(atposition<1||dotposition<atposition+2||dotposition+2>=x.length){
+                        alert("Please enter a valid email address.");
+                        return false;
+                       
+                       }
+                    return true;
+                }*/
+                function validatePaymentForm() {
+                    if (document.updatePayment.payAmount.value == ""){
+                        alert("Amount paid must be entered");
+                        document.updatePayment.payAmount.focus();
+                        return false;
+                    }
+                    if (document.updatePayment.name.options[document.updatePayment.selectedIndex].value == ""){
+                        alert("Name must be selected");
+                        document.updatePayment.name.focus();
+                        return false;
+                    }
+                    if (document.updatePayment.payType.options[document.updatePayment.selectedIndex].value == ""){
+                        alert("Amount type must be selected");
+                        document.updatePayment.payType.focus();
+                        return false;
+                    }
+                    return true;
+                }
+            </script>

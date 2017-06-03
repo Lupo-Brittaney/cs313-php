@@ -55,9 +55,9 @@ if (isset($_POST['logout'])){
     <body>
         <header>
             <h1>LeaguePay</h1>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <form class="logoutButton" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <input type="hidden" name ="logout" >
-                <input type="submit" name='logout' value="Log Out">
+                <input type="submit" name='logout' value="Log Out" class="logoutbtn">
             </form>
             
         </header>

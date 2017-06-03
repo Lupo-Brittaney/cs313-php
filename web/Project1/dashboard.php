@@ -39,17 +39,17 @@ if (isset($_POST['logout'])){
     </head>
     <body>
         <header>
-            <h1>LeaguePay</h1>
-              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <a href="dashboard.php"><h1>LeaguePay</h1></a>
+              <form class="logoutButton" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <input type="hidden" name ="logout" >
-                <input type="submit" name='logout' value="Log Out">
+                <input type="submit" name='logout' value="Log Out" class="logoutbtn">
             </form>
         </header>
         <div class="center">
-            
+            <h2> <?php echo $_SESSION['name']; ?>'s Dashboard</h2>
             <?php if (!empty($message)){?><p><?php echo $message;?></p><?php }?>
             <table>
-                
+                <caption>MEMBER</caption>
                 <tr>
                     <th>Organization</th>
                     <th>Fee</th>
@@ -64,7 +64,7 @@ if (isset($_POST['logout'])){
                 <?php endforeach; ?>
             </table>
             <table>
-                
+                <caption>OWNER</caption>
                 <tr>
                     <th>Organization</th>
                     <th>Fee</th>
@@ -84,7 +84,7 @@ if (isset($_POST['logout'])){
                 </tr>
                 <?php endforeach; ?>
             </table>
-            <a href="addOrg.php">Add New Organization</a>
+            <a href="addOrg.php" class="addbtn">Add New Organization</a>
         </div>
         
     </body>    

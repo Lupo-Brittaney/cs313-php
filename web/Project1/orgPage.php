@@ -20,6 +20,8 @@ if (isset($_POST['toUpdate'])){
     $_SESSION['orgName']= $orgName;
 }
 $members = get_members($_SESSION['orgId']);
+$fee = get_fee($_SESSION['orgId']);
+
 
 if (isset($_POST['update'])){
     $memberId= filter_input(INPUT_POST, 'name', FILTER_SANITIZE_NUMBER_INT);
@@ -69,18 +71,23 @@ if (isset($_POST['addMember'])){
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="styles.css" />
         <title><?php echo $_SESSION['name']; ?> | LeaguePay</title>
+
+        
     </head>
     <body>
         <header>
             <a href="dashboard.php"><h1>LeaguePay</h1></a>
-              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+              <form class="logoutButton" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <input type="hidden" name ="logout" >
-                <input type="submit" name='logout' value="Log Out">
+                <input type="submit" name='logout' value="Log Out" class="logoutbtn">
             </form>
 
         </header>
         <div class="center">
+
             <h2><?php echo $_SESSION['orgName']; ?></h2>
+            <h3 id="feestatement">Organization fee is $<?php echo $fee['fee']; ?></h3>
+            
             <table>
                 
                 <tr>
@@ -96,27 +103,26 @@ if (isset($_POST['addMember'])){
                     <td>$<?php echo $member['payamount']; ?></td>
                     <td><a href="mailto:<?php echo $member['email']; ?>"><?php echo $member['email']; ?></a></td>
                     <td>            
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                        <form name="deleteMember" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                         <input type="hidden" value="<?php echo $member['id']; ?>">
                         <input type="submit" name="deleteMember" value="Delete Member" onclick="return confirm('Are you sure you want to delete this member?');">
             </form> </td>
                 </tr>
                 <?php endforeach; ?>
             </table>
-            
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <form class="addform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
                 <fieldset>
                     <legend><h3>Add Member</h3></legend>
                 <label for="firstName">First Name</label>
-                <input type="text" name="firstName">
+                <input type="text" name="firstName" required>
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName">
+                <input type="text" name="lastName" required><br>
                 <label for="email">Email</label>
-                <input type="text" name="email">
+                <input type="text" name="email" required><br>
                 <label for ="payAmount">Payment Amount</label>
-                <input type="number" name="payAmount">
+                <input type="number" name="payAmount" required>
                 <label for="payType">Payment Type</label>
-                <select name="payType">
+                <select name="payType" required>
                     <option value="cash">Cash</option>
                     <option value="check">Check</option>
                     <option value="other">Other</option>
@@ -125,21 +131,20 @@ if (isset($_POST['addMember'])){
                 <input type="submit" name="addMember" value="Add Member">
                 </fieldset>
             </form>
-            
-            
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+
+            <form class="updateform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" > 
                 <fieldset>
                     <legend><h3>Update Payment</h3></legend>
                 <label for="name">Name</label>
-                <select name="name">
+                <select name="name" required>
                     <?php foreach ($members as $member):?>
                     <option value="<?php echo $member['id']; ?>"><?php echo $member['firstname']; ?></option> 
                     <?php endforeach; ?>
-                </select>
+                </select><br>
                 <label for="payAmount"> Payment Amount</label>
-                <input type="number" name="payAmount">
+                <input type="number" name="payAmount" required>
                 <label for="payType"> Payment Type</label>
-                <select name="payType">
+                <select name="payType" required>
                     <option value="cash">Cash</option>
                     <option value="check">Check</option>
                     <option value="other">Other</option>
@@ -148,10 +153,12 @@ if (isset($_POST['addMember'])){
                 </fieldset>
             </form>
             
-            <h3>Delete this Organization</h3>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-                <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete this organization?');">
+
+
+            <form name ="deleteOrganization" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <input type="submit" name="delete" value="Delete this Organization" onclick="return confirm('Are you sure you want to delete this organization?');" class="deletebtn">
             </form>                   
+
 
         </div>
         

@@ -36,22 +36,45 @@ if (isset($_POST['add'])){
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="styles.css" />
         <title><?php echo $_SESSION['name']; ?> | LeaguePay</title>
+        <script>
+            function validateOrgForm() {
+                var fee=document.addOrg.fee.value;
+                if(document.addOrg.orgName.value == ""){
+                    alert("Must enter an organization name");
+                    document.addOrg.orgName.focus();
+                    return false;
+                }
+                if(document.addOrg.fee.value == ""){
+                    alert("Must enter a fee amount");
+                    document.addOrg.fee.focus();
+                    return false;
+                }if (isNaN(fee)){
+                    alert("Fee must be a number");
+                    document.addOrg.fee.focus();
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <header>
-            <h1>LeaguePay</h1>
-              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <a href="dashboard.php"><h1>LeaguePay</h1></a>
+              <form class="logoutButton" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <input type="hidden" name ="logout" >
-                <input type="submit" name='logout' value="Log Out">
+                <input type="submit" name='logout' value="Log Out" class="logoutbtn">
             </form>
+           
         </header>
+
         <div class="center">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <h2>Add New Organization</h2>
+            <form name="addOrg" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" onsubmit="return validateOrgForm()" class= "addOrg">
                 
                 <label for="orgName">Organization Name</label>
-                <input type="text" name="orgName">
+                <input type="text" name="orgName" required>
                 <label for="fee">Fee</label>
-                <input type="number" name="fee">
+                <input type="number" name="fee" required>
 
                 <input type="submit" name ="add" value="Add">
                 
